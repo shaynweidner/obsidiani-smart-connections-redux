@@ -1,14 +1,14 @@
 {
-  "name": "obsidian-smart-connections",
+  "name": "obsidian-smart-connections-redux",
   "version": "1.6.37",
-  "description": "Link and chat with your notes using ChatGPT and embedding artificial intelligence from OpenAI.",
+  "description": "Link your notes using whatever embedding model endpoint you want.",
   "main": "main.js",
   "scripts": {
     "bundle": "node esbuild.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/brianpetro/obsidian-smart-connections.git"
+    "url": "git+https://github.com/shaynweidner/obsidiani-smart-connections-redux.git"
   },
   "keywords": [
     "Obsidian",
@@ -19,16 +19,13 @@
     "Embeddings",
     "Notes"
   ],
-  "author": "WFH Brian (Brian Petro)",
+  "author": "Shayn Weidner (Brian Petro originally)",
   "license": "SEE LICENSE IN LICENSE",
   "bugs": {
-    "url": "https://github.com/brianpetro/obsidian-smart-connections/issues"
+    "url": "https://github.com/shaynweidner/obsidiani-smart-connections-redux/issues"
   },
-  "homepage": "https://github.com/brianpetro/obsidian-smart-connections",
+  "homepage": "https://github.com/shaynweidner/obsidiani-smart-connections-redux",
   "devDependencies": {
     "esbuild": "^0.17.19"
-  },
-  "dependencies": {
-    "vec-lite": "file:../vec_lite"
   }
 }

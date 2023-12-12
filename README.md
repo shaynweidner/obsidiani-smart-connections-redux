@@ -1,3 +1,8 @@
+# obsidiani-smart-connections-redux
+
+Original README contents:
+
+
 # Smart Connections: AI-Powered Note Connections for Obsidian
 Ever felt overwhelmed by a growing collection of notes in Obsidian, wondering how to uncover hidden connections and insights? Discover Smart Connections, an AI-powered plugin that transforms your note-taking experience and helps you tap into the full potential of your ideas.
 
