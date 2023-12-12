@@ -78,7 +78,7 @@ module.exports = class VecLite {
           }
         }
         console.log("failed to load embeddings file, prompt user to initiate bulk embed");
-        await init_embeddings_file();
+        await this.init_embeddings_file();
         return false;
       }
     }

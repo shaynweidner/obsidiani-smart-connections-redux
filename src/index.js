@@ -883,7 +883,9 @@ class SmartConnectionsPlugin extends Obsidian.Plugin {
         parsedResp,
         selectedProfile.responseJSON
       );
-      const adjustedResponse = { data: [{ embedding: embeddingVector, index: 0 }] };
+      const adjustedResponse = {
+        data: [{ embedding: embeddingVector, index: 0 }],
+      };
 
       return adjustedResponse;
     } catch (error) {
@@ -906,7 +908,6 @@ class SmartConnectionsPlugin extends Obsidian.Plugin {
 
       // Find the path to the placeholder in the format object
       let pathToEmbedding = findPathToEmbedding(formatObj, "{embed_output}");
-
 
       // Extract the embedding vector from the response JSON using the found path
       let embeddingVector = getValueAtPath(responseJson, pathToEmbedding);
@@ -1985,7 +1986,7 @@ class SmartConnectionsView extends Obsidian.ItemView {
       // join back together
       link = link.join("");
       // replace '#' with ' » '
-      link = link.replace(/\#/g, " » ");
+      link = link.replace(/#/g, " » ");
     } else {
       // remove '.md'
       link = link.replace(".md", "");
@@ -2023,15 +2024,6 @@ class SmartConnectionsView extends Obsidian.ItemView {
     if (nearest_context) {
       top_bar.createEl("p", { cls: "sc-context", text: nearest_context });
     }
-    // add chat button
-    const chat_button = top_bar.createEl("button", { cls: "sc-chat-button" });
-    // add icon to chat button
-    Obsidian.setIcon(chat_button, "message-square");
-    // add click listener to chat button
-    chat_button.addEventListener("click", () => {
-      // open chat
-      this.plugin.open_chat();
-    });
     // add search button
     const search_button = top_bar.createEl("button", {
       cls: "sc-search-button",
@@ -2124,7 +2116,9 @@ class SmartConnectionsView extends Obsidian.ItemView {
     create_button.addEventListener("click", async () => {
       // create embeddings.json file
       const profileSpecificFileName = `embeddings-${this.selectedProfile.name}.json`;
-      await this.plugin.smart_vec_lite.init_embeddings_file(profileSpecificFileName);
+      await this.plugin.smart_vec_lite.init_embeddings_file(
+        profileSpecificFileName
+      );
       // reload view
       await this.render_connections();
     });
@@ -2180,13 +2174,6 @@ class SmartConnectionsView extends Obsidian.ItemView {
       display: "Smart Connections Files",
       defaultMod: true,
     });
-    this.app.workspace.registerHoverLinkSource(
-      SMART_CONNECTIONS_CHAT_VIEW_TYPE,
-      {
-        display: "Smart Chat Links",
-        defaultMod: true,
-      }
-    );
 
     this.app.workspace.onLayoutReady(this.initialize.bind(this));
   }
@@ -2194,7 +2181,10 @@ class SmartConnectionsView extends Obsidian.ItemView {
   async initialize() {
     this.set_message("Loading embeddings file...");
     // console.log(this);
-    const profileSpecificFileName = `embeddings-${this.plugin.settings.profiles[this.plugin.settings.selectedProfileIndex].name}.json`;
+    const profileSpecificFileName = `embeddings-${
+      this.plugin.settings.profiles[this.plugin.settings.selectedProfileIndex]
+        .name
+    }.json`;
     const vecs_intiated = await this.plugin.init_vecs(profileSpecificFileName);
     // const vecs_intiated = await this.plugin.init_vecs();
     if (vecs_intiated) {
@@ -2422,7 +2412,7 @@ class SmartConnectionsSettingsTab extends Obsidian.PluginSettingTab {
     this.headersField = new Obsidian.Setting(containerEl)
       .setName("Custom Headers")
       .addTextArea((textArea) =>
-        textArea.onChange((value) => {
+        textArea.onChange(() => {
           // Handle headers change
         })
       );
@@ -2431,7 +2421,7 @@ class SmartConnectionsSettingsTab extends Obsidian.PluginSettingTab {
     this.reqBodyField = new Obsidian.Setting(containerEl)
       .setName("Request Body")
       .addTextArea((textArea) =>
-        textArea.onChange((value) => {
+        textArea.onChange(() => {
           // Handle headers change
         })
       );
@@ -2440,7 +2430,7 @@ class SmartConnectionsSettingsTab extends Obsidian.PluginSettingTab {
     this.jsonPathField = new Obsidian.Setting(containerEl)
       .setName("Response JSON")
       .addTextArea((textArea) =>
-        textArea.onChange((value) => {
+        textArea.onChange(() => {
           // Handle JSON path change
         })
       );
@@ -2461,9 +2451,9 @@ class SmartConnectionsSettingsTab extends Obsidian.PluginSettingTab {
         this.jsonPathField.components[0].inputEl.value =
           this.selectedProfile.responseJSON;
 
-          const profileSpecificFileName = `embeddings-${this.selectedProfile.name}.json`;
-          await this.plugin.saveSettings();
-          await this.plugin.init_vecs(profileSpecificFileName);
+        const profileSpecificFileName = `embeddings-${this.selectedProfile.name}.json`;
+        await this.plugin.saveSettings();
+        await this.plugin.init_vecs(profileSpecificFileName);
       }
     };
 
@@ -2799,7 +2789,5 @@ class SmartConnectionsSettingsTab extends Obsidian.PluginSettingTab {
 function line_is_heading(line) {
   return line.indexOf("#") === 0 && ["#", " "].indexOf(line[1]) !== -1;
 }
-
-const SMART_CONNECTIONS_CHAT_VIEW_TYPE = "smart-connections-chat-view";
 
 module.exports = SmartConnectionsPlugin;
