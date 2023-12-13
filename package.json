@@ -1,6 +1,6 @@
 {
   "name": "obsidian-smart-connections-redux",
-  "version": "1.6.37",
+  "version": "1.0.1",
   "description": "Link your notes using whatever embedding model endpoint you want.",
   "main": "main.js",
   "scripts": {
